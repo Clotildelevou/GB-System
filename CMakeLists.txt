@@ -3,7 +3,7 @@
 # ==========================================
 
 cmake_minimum_required(VERSION 3.15)
-project(CHIP8-emulator VERSION 1.0.0 LANGUAGES C)
+project(gb-emulator VERSION 1.0.0 LANGUAGES C)
 
 #Verbose option
 set(CMAKE_VERBOSE_MAKEFILE OFF)
@@ -24,13 +24,20 @@ set(LDFLAGS_TEST -fsanitize=address -lcriterion)
 # The name of all the libs in the project.
 # If you want to add a lib, add its name to this variable
 set(LIBS
+        gameboy
         cpu
         )
 
 # find_package(SDL2 REQUIRED)
 # include_directories(${SDL2_INCLUDE_DIRS})
 
-# chip8
+# gameboy
+
+file(GLOB_RECURSE GB_SOURCES RELATIVE ${CMAKE_SOURCE_DIR} "src/gameboy/*.c")
+add_library(gameboy STATIC ${GB_SOURCES})
+target_compile_options(gameboy PRIVATE ${CFLAGS})
+
+# cpu
 file(GLOB_RECURSE CPU_SOURCES RELATIVE ${CMAKE_SOURCE_DIR} "src/cpu/*.c")
 add_library(cpu STATIC ${CPU_SOURCES})
 target_compile_options(cpu PRIVATE ${CFLAGS})
