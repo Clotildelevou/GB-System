@@ -34,3 +34,6 @@
 # Clion trashfiles
 .idea/
 cmake-build-debug/
+
+# Cmake trashfiles
+build/
