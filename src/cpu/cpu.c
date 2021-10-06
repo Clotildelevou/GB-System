@@ -3,6 +3,10 @@
 cpu *init_cpu(void)
 {
     cpu *new_cpu = malloc(sizeof(cpu));
+    if (new_cpu == NULL)
+    {
+        return NULL;
+    }
 
     //Init register
     new_cpu->A = 0x0;
