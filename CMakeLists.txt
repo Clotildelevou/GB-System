@@ -3,7 +3,7 @@
 # ==========================================
 
 cmake_minimum_required(VERSION 3.15)
-project(gb-emulator VERSION 1.0.0 LANGUAGES C)
+project(gb-emulator VERSION 1.0.0 LANGUAGES CXX)
 
 #Verbose option
 set(CMAKE_VERBOSE_MAKEFILE OFF)
@@ -14,7 +14,7 @@ option(ENABLE_TESTS "Build tests along with the library" ON)
 
 set(SOURCE_ROOT "${PROJECT_SOURCE_DIR}/src")
 set(EXC_TST "${PROJECT_SOURCE_DIR}/build")
-set(CFLAGS -Wextra -Werror -pedantic -std=c99 -I${SOURCE_ROOT})
+set(CXX_FLAGS -Wextra -Werror -pedantic -std=c++17 -I${SOURCE_ROOT})
 set(LDFLAGS_TEST -fsanitize=address -lcriterion)
 
 # ==========================================
@@ -33,14 +33,14 @@ set(LIBS
 
 # gameboy
 
-file(GLOB_RECURSE GB_SOURCES RELATIVE ${CMAKE_SOURCE_DIR} "src/gameboy/*.c")
+file(GLOB_RECURSE GB_SOURCES RELATIVE ${CMAKE_SOURCE_DIR} "src/gameboy/*.cpp")
 add_library(gameboy STATIC ${GB_SOURCES})
-target_compile_options(gameboy PRIVATE ${CFLAGS})
+target_compile_options(gameboy PRIVATE ${CXX_FLAGS})
 
 # cpu
-file(GLOB_RECURSE CPU_SOURCES RELATIVE ${CMAKE_SOURCE_DIR} "src/cpu/*.c")
+file(GLOB_RECURSE CPU_SOURCES RELATIVE ${CMAKE_SOURCE_DIR} "src/cpu/*.cpp")
 add_library(cpu STATIC ${CPU_SOURCES})
-target_compile_options(cpu PRIVATE ${CFLAGS})
+target_compile_options(cpu PRIVATE ${CXX_FLAGS})
 
 # this is how you are supposed to link a librairie
 # file(GLOB_RECURSE LIB_SOURCES RELATIVE ${CMAKE_SOURCE_DIR} "src/lib/*.c")
@@ -72,6 +72,6 @@ endif()
 #           Final executable
 # ==========================================
 
-add_executable(gb_emulator src/main.c)
+add_executable(gb_emulator src/main.cpp)
 target_link_libraries(gb_emulator PRIVATE ${LIBS}) # you can add other librairies path if necessary
-target_compile_options(gb_emulator PRIVATE ${CFLAGS})
+target_compile_options(gb_emulator PRIVATE ${CXX_FLAGS})
