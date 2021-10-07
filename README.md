@@ -1,5 +1,8 @@
 # Gameboy emulator
 
+# Description
+Ce projet est un émulateur de Gameboy implémenté en C++
+
 ## Installation
 Ce projet est en construction.
 
