@@ -15,7 +15,7 @@ option(ENABLE_TESTS "Build tests along with the library" ON)
 set(SOURCE_ROOT "${PROJECT_SOURCE_DIR}/src")
 set(EXC_TST "${PROJECT_SOURCE_DIR}/build")
 set(CXX_FLAGS -Wextra -Werror -pedantic -std=c++17 -I${SOURCE_ROOT})
-set(LDFLAGS_TEST -fsanitize=address -lcriterion)
+set(LDFLAGS_TEST -fsanitize=address)
 
 # ==========================================
 #             Libraries
@@ -24,8 +24,6 @@ set(LDFLAGS_TEST -fsanitize=address -lcriterion)
 # The name of all the libs in the project.
 # If you want to add a lib, add its name to this variable
 set(LIBS
-        gameboy
-        cpu
         )
 
 # find_package(SDL2 REQUIRED)
@@ -33,14 +31,14 @@ set(LIBS
 
 # gameboy
 
-file(GLOB_RECURSE GB_SOURCES RELATIVE ${CMAKE_SOURCE_DIR} "src/gameboy/*.cpp")
-add_library(gameboy STATIC ${GB_SOURCES})
-target_compile_options(gameboy PRIVATE ${CXX_FLAGS})
+#file(GLOB_RECURSE GB_SOURCES RELATIVE ${CMAKE_SOURCE_DIR} "src/gameboy/*.cpp")
+#add_library(gameboy STATIC ${GB_SOURCES})
+#target_compile_options(gameboy PRIVATE ${CXX_FLAGS})
 
 # cpu
-file(GLOB_RECURSE CPU_SOURCES RELATIVE ${CMAKE_SOURCE_DIR} "src/cpu/*.cpp")
-add_library(cpu STATIC ${CPU_SOURCES})
-target_compile_options(cpu PRIVATE ${CXX_FLAGS})
+#file(GLOB_RECURSE CPU_SOURCES RELATIVE ${CMAKE_SOURCE_DIR} "src/cpu/*.cpp")
+#add_library(cpu STATIC ${CPU_SOURCES})
+#target_compile_options(cpu PRIVATE ${CXX_FLAGS})
 
 # this is how you are supposed to link a librairie
 # file(GLOB_RECURSE LIB_SOURCES RELATIVE ${CMAKE_SOURCE_DIR} "src/lib/*.c")
