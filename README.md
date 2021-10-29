@@ -1,4 +1,4 @@
-# Gameboy emulator
+# Gameboy SYstem
 
 # Description
 Ce projet est un émulateur de Gameboy implémenté en C++
